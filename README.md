@@ -164,7 +164,8 @@ For example:
 | NXDOMAIN, with no MX or A | Rejects using Postfix's configured unknown-address response (450 by default) | `550 5.1.2` |
 | Temporary DNS failure | Applies Postfix's configured temporary-failure action | `DUNNO` |
 
-Suppose a sender types `user@gmial.con`. If that domain does not exist or has
+Suppose a sender types `user@gmial.com` instead of `user@gmail.com`. If the
+mistyped domain does not exist or has
 no explicit valid MX, this service returns `550 5.1.2` during `RCPT TO`, and
 Postfix does not accept or queue the message. If the mistyped domain is
 registered and publishes a valid MX, the service returns `DUNNO`; DNS policy
