@@ -2,10 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## 1.0.1 - 2026-08-27
 
 - Add concrete outcome examples comparing the service with Postfix's native
   `reject_unknown_recipient_domain` restriction.
+- Clarify the operational purpose, intentional RFC compatibility trade-off,
+  permanent versus temporary DNS handling, detection limits, and safe Postfix
+  restriction placement.
+- Update the packaged release examples for version 1.0.1.
 
 ## 1.0.0 - 2026-08-26
 

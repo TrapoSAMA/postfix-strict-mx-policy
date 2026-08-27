@@ -24,7 +24,7 @@ else:
     DNS_IMPORT_ERROR = None
 
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 REJECT_TEMPLATES = {
     "es": (
         "action=550 5.1.2 El correo no se pudo entregar porque el dominio "
