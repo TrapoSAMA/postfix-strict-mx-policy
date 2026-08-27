@@ -1,0 +1,9 @@
+Postfix strict MX policy
+Copyright (C) 2026 Rodrigo Cortés Cano
+
+This project is licensed under the GNU General Public License version 2.0
+only. See LICENSE for the complete terms and warranty disclaimer.
+
+This distribution declares dnspython as an installation dependency. dnspython
+is not bundled with this project and is licensed separately under the ISC
+License. See THIRD_PARTY_NOTICES.md.

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Rodrigo Cortés Cano
+# SPDX-License-Identifier: GPL-2.0-only
 
 import importlib.util
 import io

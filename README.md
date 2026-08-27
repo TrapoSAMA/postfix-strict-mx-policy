@@ -12,15 +12,28 @@ implicit MX. This policy rejects that case by design.
 ## Requirements
 
 - Python 3.8 or newer
-- `dnspython`
-
-Install the dependency using the operating-system package when available, or:
-
-```bash
-python3 -m pip install dnspython
-```
+- `dnspython` (installed automatically by the packaged distribution)
 
 ## Installation
+
+### Packaged release
+
+Download the wheel for the selected release and install it with `pip`. For
+version 1.0.0:
+
+```bash
+python3 -m pip install \
+  https://github.com/TrapoSAMA/postfix-strict-mx-policy/releases/download/v1.0.0/postfix_strict_mx_policy-1.0.0-py3-none-any.whl
+check-mx-policy --check
+```
+
+The package installs the `check-mx-policy` command and selects a compatible
+`dnspython` release for the running Python version.
+
+### Standalone script
+
+When dependencies are managed by the operating system, the original script
+can still be installed directly:
 
 ```bash
 install -o root -g root -m 755 check_mx_policy.py /usr/local/bin/check_mx_policy.py
@@ -29,6 +42,9 @@ install -o root -g root -m 755 check_mx_policy.py /usr/local/bin/check_mx_policy
 
 The check reports the Python and dnspython versions and verifies that the
 configured DNS resolver can answer a root NS query.
+
+The examples below use the standalone path. A packaged installation may use
+the absolute path reported by `command -v check-mx-policy` instead.
 
 ## Postfix example
 
@@ -115,6 +131,25 @@ postfix reload
 - Internationalized domains are converted to their ASCII IDNA representation.
 - A bounded resolver cache reduces repeated DNS queries within each process.
 
+## Difference from `reject_unknown_recipient_domain`
+
+Postfix already provides
+[`reject_unknown_recipient_domain`](https://www.postfix.org/postconf.5.html#reject_unknown_recipient_domain).
+That restriction rejects a non-local recipient domain when it has neither an
+MX record nor an A record, or when its MX is malformed.
+It therefore permits standard SMTP implicit-MX delivery to an address record.
+Postfix also handles Null MX natively in current versions and applies its own
+temporary-failure behavior without an external policy service.
+
+This project is deliberately stricter: it requires at least one explicit,
+non-Null MX record and rejects a domain that has only A or AAAA records. It
+also returns `DUNNO` for temporary DNS or internal failures so Postfix can
+continue evaluating later restrictions.
+
+Use the built-in restriction when the goal is simply to reject unknown
+recipient domains. Use this service only when the installation intentionally
+requires every checked recipient domain to publish an explicit MX record.
+
 ## Tests
 
 The tests use a fake resolver and do not depend on public DNS:
@@ -125,5 +160,7 @@ python3 -m unittest discover -s tests -v
 
 ## License
 
-This project is distributed under the GNU General Public License version 2.
-See `LICENSE` for the complete terms.
+Version 1.0.0 is distributed under the GNU General Public License version 2.0
+only (`GPL-2.0-only`). Copying, modification, and redistribution are permitted
+under those terms and come without warranty. See `LICENSE`, `NOTICE`, and
+`THIRD_PARTY_NOTICES.md` for the complete licensing information.

@@ -1,0 +1,4 @@
+include CHANGELOG.md
+include NOTICE
+include THIRD_PARTY_NOTICES.md
+recursive-include tests *.py

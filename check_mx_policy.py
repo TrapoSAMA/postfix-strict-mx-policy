@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Rodrigo Cortés Cano
+# SPDX-License-Identifier: GPL-2.0-only
+
 """Postfix policy service that requires an explicit recipient-domain MX."""
 
 import argparse

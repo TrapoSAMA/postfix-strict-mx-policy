@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "postfix-strict-mx-policy"
+dynamic = ["version"]
+description = "Fail-open Postfix policy service requiring explicit recipient-domain MX records"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-2.0-only"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+authors = [
+    { name = "Rodrigo Cortés Cano" },
+]
+keywords = ["postfix", "smtp", "dns", "mx", "policy-service"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: No Input/Output (Daemon)",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Email :: Mail Transport Agents",
+    "Topic :: Internet :: Name Service (DNS)",
+]
+dependencies = [
+    "dnspython>=2.6.1,<2.7; python_version < '3.9'",
+    "dnspython>=2.7,<2.8; python_version >= '3.9' and python_version < '3.10'",
+    "dnspython>=2.8,<3; python_version >= '3.10'",
+]
+
+[project.scripts]
+check-mx-policy = "check_mx_policy:main"
+
+[project.urls]
+Homepage = "https://github.com/TrapoSAMA/postfix-strict-mx-policy"
+Documentation = "https://github.com/TrapoSAMA/postfix-strict-mx-policy#readme"
+Issues = "https://github.com/TrapoSAMA/postfix-strict-mx-policy/issues"
+Source = "https://github.com/TrapoSAMA/postfix-strict-mx-policy"
+
+[tool.setuptools]
+py-modules = ["check_mx_policy"]
+
+[tool.setuptools.dynamic]
+version = { attr = "check_mx_policy.VERSION" }
