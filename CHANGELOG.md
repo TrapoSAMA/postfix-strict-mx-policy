@@ -13,3 +13,5 @@ All notable changes to this project are documented in this file.
 - Add wheel and source distribution metadata.
 - Document the intentional difference from Postfix's built-in
   `reject_unknown_recipient_domain` restriction.
+- Clarify that rejection occurs immediately during `RCPT TO`, before the
+  message is accepted or queued, and document the limits of typo detection.

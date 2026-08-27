@@ -9,6 +9,15 @@ This is intentionally stricter than standard SMTP delivery. SMTP normally
 allows a domain with an A or AAAA record and no MX to receive mail through an
 implicit MX. This policy rejects that case by design.
 
+The rejection happens during `RCPT TO`, before Postfix accepts or queues the
+message. This gives the submitting client an immediate `550 5.1.2` response
+when a typing mistake results in a nonexistent domain or one without an
+explicit valid MX, instead of leaving the message queued for later retries.
+
+This service is not a spelling checker and does not validate the recipient
+mailbox. A mistyped or lookalike domain that is registered and publishes a
+valid MX record will pass this policy.
+
 ## Requirements
 
 - Python 3.8 or newer
