@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## Unreleased
+
+- Add concrete outcome examples comparing the service with Postfix's native
+  `reject_unknown_recipient_domain` restriction.
+
 ## 1.0.0 - 2026-08-26
 
 - Add the reusable Postfix policy protocol service.
